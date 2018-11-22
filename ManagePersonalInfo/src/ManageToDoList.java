@@ -6,7 +6,6 @@ class ToDo implements Serializable {
 	private static final long serialVersionUID = 8137581867827899216L;
 	private Date createDate, dueDate;
 	private String description;
-	private static SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
 	public ToDo() {
 		createDate = null;
@@ -22,7 +21,8 @@ class ToDo implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Create Date: " + date.format(createDate) + "\nDue Date: " + date.format(dueDate) + "\n" + description;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		return "Create Date: " + dateFormat.format(createDate) + "\nDue Date: " + dateFormat.format(dueDate) + "\n" + description;
 	}
 	
 	public static void printToDoList(Vector<ToDo> toDoList) {
@@ -88,9 +88,9 @@ class ManageToDoList {
 		while (true) {
 			try {
 				System.out.print("Input due date(yyyy/MM/dd): ");
-				SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 				String dueDate = sc.nextLine();
-				return date.parse(dueDate);
+				return dateFormat.parse(dueDate);
 			}
 			catch(Exception e) {
 				System.out.println("\n!! Invaild date format !!\n");
@@ -130,20 +130,20 @@ class ManageToDoList {
 		System.out.print("Select a update type: ");
 		int type = sc.nextInt();
 		switch(type) {
-		case 1: EditDue(index); break;
-		case 2: sc.nextLine(); EditDescription(index); break;
+		case 1: editDue(index); break;
+		case 2: sc.nextLine(); editDescription(index); break;
 		default: return;
 		}
 		toDoList.remove(index + 1);
 	}
 	
-	private void EditDue(int idx) {
+	private void editDue(int idx) {
 		ToDo instance = toDoList.get(idx);
 		instance.setDueDate(inputDueDate());
 		toDoList.add(idx, instance);
 	}
 	
-	private void EditDescription(int idx) {
+	private void editDescription(int idx) {
 		ToDo instance = toDoList.get(idx);
 		instance.setDescription(inputDescription());
 		toDoList.add(idx, instance);
