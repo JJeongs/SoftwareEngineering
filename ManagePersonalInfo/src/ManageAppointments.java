@@ -15,7 +15,7 @@ class Appointment implements Serializable {
 	}
 	
 	public Appointment(Date ddate, String persons, String location) {
-		this.ddate = new Date();
+		this.ddate = ddate;
 		this.persons = persons;
 		this.location = location;
 	}
@@ -91,7 +91,7 @@ class ManageAppointments {
 		sc.nextLine();
 		while (true) {
 			try {
-				System.out.print("Input due date(yyyy/MM/dd): ");
+				System.out.print("Input date(yyyy/MM/dd): ");
 				SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 				String ddate = sc.nextLine();
 				return date.parse(ddate);
