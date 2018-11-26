@@ -130,8 +130,17 @@ class ManageAppointments {
 			return;
 		}
 		Appointment.printAppointments(appointmentList);
-		System.out.print("Input Appointment# to update: ");
-		int index = sc.nextInt() - 1;
+		int index;
+		while(true) {
+			System.out.print("Input Appointment# to update: ");
+			index = sc.nextInt() - 1;
+			if(index<appointmentList.size())
+				break;
+			else {
+				System.out.println("error : input is invalid");
+			}
+		}
+		
 		System.out.println("******** You selected ********");
 		System.out.println(appointmentList.get(index));
 		System.out.println("******************************");
@@ -171,8 +180,16 @@ class ManageAppointments {
 			return;
 		}
 		Appointment.printAppointments(appointmentList);
-		System.out.print("Input a Appointment# to delete: ");
-		int index = sc.nextInt() - 1;	sc.nextLine();
+		int index;
+		while(true) {
+			System.out.print("Input a Appointment# to delete: ");
+			index = sc.nextInt() - 1; sc.nextLine();
+			if(index<appointmentList.size())
+				break;
+			else {
+				System.out.println("error : index is invalid");
+			}
+		}
 		System.out.println("******** You selected ********");
 		System.out.println(appointmentList.get(index));
 		System.out.println("******************************");
