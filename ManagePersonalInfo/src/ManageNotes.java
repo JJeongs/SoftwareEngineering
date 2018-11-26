@@ -95,8 +95,21 @@ class Note implements Serializable {
 	}
 	
 	private String inputMemo() {
-		System.out.println("Input memo:");
-		String memo = sc.nextLine();
+		System.out.println("Input memo(entering an empty line terminates the entry):");
+		String memo="";
+		String line;
+		line=sc.nextLine();
+		if(line.isEmpty()) {
+			return memo;
+		}
+		memo+=line;
+		while(sc.hasNextLine()) {
+			line=sc.nextLine();
+			if(line.isEmpty()) {
+				break;
+			}
+			memo+="\n"+line;
+		}
 		return memo;
 	}
 	
