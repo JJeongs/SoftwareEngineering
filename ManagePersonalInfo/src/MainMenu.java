@@ -11,11 +11,9 @@ public class MainMenu {
 			System.out.print("Select Menu: ");
 			int menu = sc.nextInt();
 			switch(menu) {
-<<<<<<< HEAD
 			case 1: new ManageContacts(); break;
 			case 2: new ManageToDoList(); break;
 			case 3: new ManageAppointments(); break;
->>>>>>> origin/master
 			case 4: /*new ManageNotes()*/; break;
 			case 5: System.out.println("\n********** Good bye **********"); System.exit(0);
 			}
