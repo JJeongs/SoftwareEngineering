@@ -193,10 +193,19 @@ class ManageAppointments {
 		System.out.println("******** You selected ********");
 		System.out.println(appointmentList.get(index));
 		System.out.println("******************************");
-		System.out.print("Delete? (y/n): ");
-		char ans = sc.nextLine().charAt(0);
-		if (ans == 'y')
-			appointmentList.remove(index);
+		while(true) {
+			System.out.print("Delete? (y/n): ");
+			char ans = sc.nextLine().charAt(0);
+			if (ans == 'y' || ans == 'n') {
+				if (ans == 'y') {
+					appointmentList.remove(index);
+				}
+				break;
+			}
+			else {
+				System.out.println("Input is invalid");
+			}
+		}
 	}
 	
 	private void saveAppointmentList() throws Exception {
