@@ -14,7 +14,7 @@ public class MainMenu {
 			case 1: new ManageContacts(); break;
 			case 2: new ManageToDoList(); break;
 			case 3: new ManageAppointments(); break;
-			case 4: new ManageNotes(); break;
+			case 4: new ManageNotes().printNotesMenu(); break;
 			case 5: System.out.println("\n********** Good bye **********"); System.exit(0);
 			}
 		}
