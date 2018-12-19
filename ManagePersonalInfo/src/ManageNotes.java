@@ -42,11 +42,11 @@ class Note implements Serializable {
 		this.memo = memo;
 	}
 }
- class ManageNotes {
+public class ManageNotes {
 	private Vector<Note> Notes;
 	Scanner sc = new Scanner(System.in);
 	
-	public ManageNotes() throws Exception {	
+	public void printNotesMenu() throws Exception {	
 		File file = new File("Notes");
 		if (!file.exists()) {
 			file.createNewFile();
@@ -87,11 +87,18 @@ class Note implements Serializable {
 		while (true) {
 			System.out.println("Input title(up to 25 characters):");
 			String title = sc.nextLine();
-			if (title.length() > 25)
+			if (IsLongInput(title.length()))
 				System.out.println("\n!! You entered more then 25 characters !!\n");
 			else
 				return title;
 		}
+	}
+	
+	public boolean IsLongInput(int len) {
+		if(len > 25) {
+			return true;
+		}
+		return false;
 	}
 	
 	private String inputMemo() {
@@ -133,6 +140,9 @@ class Note implements Serializable {
 		System.out.println("1. Edit title\n2. Edit memo\n3. Cancel");
 		System.out.print("Select a update type: ");
 		int type = sc.nextInt();
+		while(notInRange(1,3,type)) {
+			type=sc.nextInt();
+		}
 		switch(type) {
 		case 1: EditTitle(index); break;
 		case 2: sc.nextLine(); EditMemo(index); break;
@@ -140,7 +150,12 @@ class Note implements Serializable {
 		}
 		Notes.remove(index + 1);
 	}
-	
+	public boolean notInRange(int beginRange,int endRange,int type) {
+		if(type >= beginRange && type <= endRange) {
+			return false;
+		}
+		return true;
+	}
 	private void EditTitle(int idx) {
 		Note instance = Notes.get(idx);
 		instance.setTitle(inputTitle());
