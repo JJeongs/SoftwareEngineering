@@ -44,10 +44,10 @@ class ToDo implements Serializable {
 }
 
 class ManageToDoList {
-	private Vector<ToDo> toDoList;
+	public static Vector<ToDo> toDoList;
 	Scanner sc = new Scanner(System.in);
 	
-	public ManageToDoList() throws Exception {	
+	public void printToDoMenu() throws Exception {	
 		File file = new File("ToDoList");
 		if (!file.exists()) {
 			file.createNewFile();
@@ -102,11 +102,18 @@ class ManageToDoList {
 		while (true) {
 			System.out.println("Input description(up to 50 characters):");
 			String description = sc.nextLine();
-			if (description.length() > 50)
+			if (isValidDescriptionLength(description) == false)
 				System.out.println("\n!! You entered more then 50 characters !!\n");
 			else
 				return description;
 		}
+	}
+	
+	public boolean isValidDescriptionLength(String description) {
+		if (description.length() > 50)
+			return false;
+		else
+			return true;
 	}
 	
 	private void viewToDo() {
@@ -123,9 +130,10 @@ class ManageToDoList {
 		ToDo.printToDoList(toDoList);
 		System.out.print("Input a ToDo# to update: ");
 		int index = sc.nextInt() - 1;
-		System.out.println("******** You selected ********");
-		System.out.println(toDoList.get(index));
-		System.out.println("******************************");
+		if (showSelectedToDo(index) == false) {
+			System.out.println("\n!!! Index Out of Bound !!\n");
+			return;
+		}
 		System.out.println("1. Edit due date\n2. Edit description\n3. Cancel");
 		System.out.print("Select a update type: ");
 		int type = sc.nextInt();
@@ -135,6 +143,15 @@ class ManageToDoList {
 		default: return;
 		}
 		toDoList.remove(index + 1);
+	}
+	
+	public boolean showSelectedToDo(int index) {
+		if (toDoList.size() <= index)
+			return false;
+		System.out.println("******** You selected ********");
+		System.out.println(toDoList.get(index));
+		System.out.println("******************************");
+		return true;
 	}
 	
 	private void editDue(int idx) {
@@ -158,9 +175,10 @@ class ManageToDoList {
 		ToDo.printToDoList(toDoList);
 		System.out.print("Input a ToDo# to delete: ");
 		int index = sc.nextInt() - 1;	sc.nextLine();
-		System.out.println("******** You selected ********");
-		System.out.println(toDoList.get(index));
-		System.out.println("******************************");
+		if (showSelectedToDo(index) == false) {
+			System.out.println("\n!!! Index Out of Bound !!\n");
+			return;
+		}
 		System.out.print("Delete? (y/n): ");
 		char ans = sc.nextLine().charAt(0);
 		if (ans == 'y')
