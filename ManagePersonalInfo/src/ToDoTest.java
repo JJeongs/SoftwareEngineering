@@ -1,35 +1,21 @@
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.Vector;
-
 import org.junit.jupiter.api.*;
 
 public class ToDoTest {
 	@Test
-	void indexBountTest() throws Exception {
-		File file = new File("ToDoList");
-		if (!file.exists()) {
-			file.createNewFile();
-			ManageToDoList.toDoList = new Vector<ToDo>();
-		}
-		else {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ToDoList"));
-			ManageToDoList.toDoList = (Vector<ToDo>)ois.readObject();
-			ois.close();
-		}
+	void dateFormatTest() {
 		ManageToDoList manager = new ManageToDoList();
-		assertFalse(manager.showSelectedToDo(ManageToDoList.toDoList.size() + 3));
+		assertNotNull(manager.generateFormattedDueDate("2018/12/25"));
+		assertNull(manager.generateFormattedDueDate("20181225"));
 	}
 	
 	@Test
 	void descriptionLengthTest() {
 		ManageToDoList manager = new ManageToDoList();
-		String testString = new String();
-		for (int i = 0; i < 100; i++)
-			testString += "*";
-		assertFalse(manager.isValidDescriptionLength(testString));
+		String invalidString = new String();
+		for (int i = 0; i < 51; i++)
+			invalidString += "*";
+		assertFalse(manager.isValidDescriptionLength(invalidString));
+		assertTrue(manager.isValidDescriptionLength("Valid Description"));
 	}
 }

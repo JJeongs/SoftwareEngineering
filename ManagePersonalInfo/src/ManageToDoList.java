@@ -44,7 +44,7 @@ class ToDo implements Serializable {
 }
 
 class ManageToDoList {
-	public static Vector<ToDo> toDoList;
+	private Vector<ToDo> toDoList;
 	Scanner sc = new Scanner(System.in);
 	
 	public void printToDoMenu() throws Exception {	
@@ -86,15 +86,23 @@ class ManageToDoList {
 	private Date inputDueDate() {
 		sc.nextLine();
 		while (true) {
-			try {
-				System.out.print("Input due date(yyyy/MM/dd): ");
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-				String dueDate = sc.nextLine();
-				return dateFormat.parse(dueDate);
-			}
-			catch(Exception e) {
+			System.out.print("Input due date(yyyy/MM/dd): ");
+			String strDueDate = sc.nextLine();
+			Date dueDate = generateFormattedDueDate(strDueDate);
+			if (dueDate == null)
 				System.out.println("\n!! Invaild date format !!\n");
-			}
+			else return dueDate;
+		}
+	}
+	
+	public Date generateFormattedDueDate(String dueDate) {
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date returnDueDate = dateFormat.parse(dueDate);
+			return returnDueDate;
+		}
+		catch(Exception e) {
+			return null;
 		}
 	}
 	
@@ -145,7 +153,7 @@ class ManageToDoList {
 		toDoList.remove(index + 1);
 	}
 	
-	public boolean showSelectedToDo(int index) {
+	private boolean showSelectedToDo(int index) {
 		if (toDoList.size() <= index)
 			return false;
 		System.out.println("******** You selected ********");
