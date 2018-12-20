@@ -1,7 +1,8 @@
 
 import java.util.*;
 import java.io.*;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 class Contact implements Serializable {
 	private static final long serialVersionUID = 8137581867827899216L;
 	private String name,phone,email;
@@ -56,11 +57,15 @@ class Contact implements Serializable {
 	}
 }
 
-class ManageContacts {
+public class ManageContacts {
 	private Vector<Contact> contactList;
 	Scanner sc = new Scanner(System.in);
 
-	public ManageContacts() throws Exception {
+	
+	public ManageContacts() {
+		
+		}
+	public void printContactsMenu() throws Exception{
 		File file = new File("ContactList");
 		if (!file.exists()) {
 			file.createNewFile();
@@ -106,9 +111,8 @@ class ManageContacts {
 			saveContactList();
 		}
 	}
-
 	private void createContact() {
-		System.out.println("\n******** Create Appointment ********");
+		System.out.println("\n******** Create Contacts********");
 		String name = inputName();
 		String phone = inputPhone();
 		String email = inputEmail();
@@ -127,19 +131,44 @@ class ManageContacts {
 
 	private String inputPhone() {
 		while (true) {
-			System.out.println("Input phone: ");
+			System.out.println("Input phone(format example >> 010-1234-1234: ");
 			String phone = sc.nextLine();
-			return phone;
+			if(isValidPhone(phone))
+				return phone;
+			else
+				System.out.println("잘못된 패턴입니다. 다시 입력해주세요.");
 		}
 	}
+	public boolean isValidPhone(String phone) {
+		boolean valid = false;
+		 String regex = "^\\d{2,3}-\\d{3,4}-\\d{4}$";
+		  Pattern p = Pattern.compile(regex);
+		  Matcher m = p.matcher(phone);
+		  if(m.matches())
+		   valid = true; 
+		  return valid;
+	}
+	
 
 	private String inputEmail() {
 		while (true) {
-			System.out.println("Input email:");
+			System.out.println("Input email(format example >> wjdekdms@naver.com): ");
 			String email = sc.nextLine();
-			return email;
+			if(isValidEmail(email))
+				return email;
+			else
+				System.out.println("잘못된 패턴입니다. 다시 입력해주세요.");
 		}
 	}
+	public boolean isValidEmail(String email) {
+		  boolean valid = false;
+		  String regex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+		  Pattern p = Pattern.compile(regex);
+		  Matcher m = p.matcher(email);
+		  if(m.matches())
+		   valid = true; 
+		  return valid;
+		 }
 
 	private void viewContact() {
 		System.out.println("\n********* View Contacts *********");
@@ -198,9 +227,9 @@ class ManageContacts {
 	}
 
 	private void deleteContact() {
-		System.out.println("\n******** Delete Appointment ********");
+		System.out.println("\n******** Delete Contact********");
 		if (contactList.isEmpty()) {
-			System.out.println("\n!! Empty Appointment List !!\n");
+			System.out.println("\n!! Empty Contact List !!\n");
 			return;
 		}
 		Contact.printContacts(contactList);

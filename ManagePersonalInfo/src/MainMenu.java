@@ -11,7 +11,7 @@ public class MainMenu {
 			System.out.print("Select Menu: ");
 			int menu = sc.nextInt();
 			switch(menu) {
-			case 1: new ManageContacts(); break;
+			case 1: new ManageContacts().printContactsMenu(); break;
 			case 2: new ManageToDoList().printToDoMenu(); break;
 			case 3: new ManageAppointments(); break;
 			case 4: new ManageNotes().printNotesMenu(); break;
