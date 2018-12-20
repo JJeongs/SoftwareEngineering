@@ -4,8 +4,13 @@
 
 <h3>MEMBERS</h3>
 <ul>
-  <li>1615521 류소정</li>
-  <li>1610629 이소정</li>
-  <li>1615409 정다은</li>
-  <li>1612316 황수현</li>
+  <li>1615521 류소정 - ManageAppointments</li>
+  <li>1610629 이소정 - ManageToDoList</li>
+  <li>1615409 정다은 - ManageContacts</li>
+  <li>1612316 황수현 - ManageNotes</li>
+</ul>
+<br>
+<h3>PROGRAM SOURCE FILES & TEST SOURCE FILES</h3>
+<ul>
+  <li><a href="https://github.com/JJeongs/SoftwareEngineering/tree/master/ManagePersonalInfo/src" target="_blank">ManagePersonalInfo\src</a></li>
 </ul>
