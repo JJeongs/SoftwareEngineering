@@ -13,7 +13,7 @@ public class MainMenu {
 			switch(menu) {
 			case 1: new ManageContacts().printContactsMenu(); break;
 			case 2: new ManageToDoList().printToDoMenu(); break;
-			case 3: new ManageAppointments(); break;
+			case 3: new ManageAppointments().printAppointmentMenu(); break;
 			case 4: new ManageNotes().printNotesMenu(); break;
 			case 5: System.out.println("\n********** Good bye **********"); System.exit(0);
 			}
