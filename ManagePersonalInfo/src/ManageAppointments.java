@@ -49,7 +49,6 @@ class Appointment implements Serializable {
 class ManageAppointments {
 	private Vector<Appointment> appointmentList;
 	Scanner sc = new Scanner(System.in);
-	
 	public ManageAppointments() throws Exception {	
 		File file = new File("appointmentList");
 		if (!file.exists()) {
@@ -123,6 +122,14 @@ class ManageAppointments {
 		Appointment.printAppointments(appointmentList);
 	}
 	
+	
+	public boolean checkListIndex(int ListLength, int index) {
+		if(index<ListLength)
+			return true;
+		else
+			return false;
+	}
+	
 	private void updateAppointment() {
 		System.out.println("\n******** Update Appointment ********");
 		if (appointmentList.isEmpty()) {
@@ -134,7 +141,8 @@ class ManageAppointments {
 		while(true) {
 			System.out.print("Input Appointment# to update: ");
 			index = sc.nextInt() - 1;
-			if(index<appointmentList.size())
+			
+			if(checkListIndex(appointmentList.size(),index))
 				break;
 			else {
 				System.out.println("error : input is invalid");
@@ -173,6 +181,12 @@ class ManageAppointments {
 		appointmentList.add(idx, instance);
 	}
 	
+	public boolean checkAnswer(char ans) {
+		if(ans=='y' || ans=='n')
+			return true;
+		else
+			return false;
+	}
 	private void deleteAppointment() {
 		System.out.println("\n******** Delete Appointment ********");
 		if (appointmentList.isEmpty()) {
@@ -184,7 +198,7 @@ class ManageAppointments {
 		while(true) {
 			System.out.print("Input a Appointment# to delete: ");
 			index = sc.nextInt() - 1; sc.nextLine();
-			if(index<appointmentList.size())
+			if(checkListIndex(appointmentList.size(),index))
 				break;
 			else {
 				System.out.println("error : index is invalid");
@@ -196,7 +210,8 @@ class ManageAppointments {
 		while(true) {
 			System.out.print("Delete? (y/n): ");
 			char ans = sc.nextLine().charAt(0);
-			if (ans == 'y' || ans == 'n') {
+			
+			if (checkAnswer(ans)) {
 				if (ans == 'y') {
 					appointmentList.remove(index);
 				}
