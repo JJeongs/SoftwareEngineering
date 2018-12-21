@@ -11,6 +11,8 @@ class AppointmentTest {
 		assertTrue(manager.checkValidIndex(listLength, index));
 		listLength = 1;
 		assertFalse(manager.checkValidIndex(listLength, index));
+		listLength = 10;
+		assertFalse(manager.checkValidIndex(listLength, index));
 	}
 	
 	@Test
